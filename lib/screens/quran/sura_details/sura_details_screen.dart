@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/screens/quran/sura_details/ayaat.dart';
 import 'package:islami_app/themes/my_theme.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = 'SuraDetailsScreen';
@@ -15,6 +17,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of <MyProviders> (context);
     SuraDetailsArgs args =
         ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (ayaat.isEmpty) {
@@ -23,7 +26,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
     return Stack(
       children: [
         Image.asset(
-          'assets/images/home_background.png',
+          provider.isDark? 'assets/images/dark_mode_background.png' : 'assets/images/home_background.png',
           fit: BoxFit.fitWidth,
           width: double.infinity,
         ),
@@ -37,7 +40,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               : Container(
             margin: const EdgeInsets.only(left: 25.0, right: 25.0, bottom: 50.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: provider.isDark? MyThemeData.darkPrimaryBlue : Colors.grey.shade400,
                     border:
                         Border.all(color: MyThemeData.colorGold, width: 2.0),
                     borderRadius: BorderRadius.circular(12.0),
