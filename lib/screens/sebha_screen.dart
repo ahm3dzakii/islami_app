@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/themes/my_theme.dart';
+import 'package:provider/provider.dart';
 
 class SebhaScreen extends StatefulWidget {
 
@@ -21,6 +23,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of <MyProviders> (context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -37,7 +40,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                color: MyThemeData.colorGold,
+                color: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Column(
@@ -50,17 +53,17 @@ class _SebhaScreenState extends State<SebhaScreen> {
             const SizedBox(height: 10.0,),
             Container(
               decoration: BoxDecoration(
-                color: MyThemeData.colorGold,
+                color: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton(
                   iconSize: 40,
-                  iconEnabledColor: MyThemeData.colorWhite,
+                  iconEnabledColor: provider.isDark? MyThemeData.darkPrimaryBlue : MyThemeData.colorWhite,
                   style: Theme.of(context).textTheme.subtitle2,
                   borderRadius: BorderRadius.circular(20.0),
                   value: tasbehSelected,
-                  dropdownColor: MyThemeData.colorGold,
+                  dropdownColor: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,
                   onChanged: (String? newValue) {
                     setState(() {
                       tasbehSelected = newValue;
@@ -90,8 +93,8 @@ class _SebhaScreenState extends State<SebhaScreen> {
         onPressed: () {
           incrementCounter();
         },
-        backgroundColor: MyThemeData.colorGold,
-        child: const Icon(Icons.add),
+        backgroundColor: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,
+        child:  Icon(Icons.add, color: provider.isDark? MyThemeData.darkPrimaryBlue : MyThemeData.colorWhite,),
       ),
     );
   }

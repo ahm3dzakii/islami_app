@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/screens/hadeeth/ahadeth_screen.dart';
 import 'package:islami_app/themes/my_theme.dart';
+import 'package:provider/provider.dart';
 
 class HadeethDetailsScreen extends StatelessWidget {
 
@@ -8,11 +10,12 @@ class HadeethDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of <MyProviders> (context);
     HadeethData args = ModalRoute.of(context)?.settings.arguments as HadeethData;
     return Stack(
       children: [
         Image.asset(
-          'assets/images/home_background.png',
+          provider.isDark? 'assets/images/dark_mode_background.png' : 'assets/images/home_background.png',
           fit: BoxFit.fitWidth,
           width: double.infinity,
         ),
@@ -26,7 +29,7 @@ class HadeethDetailsScreen extends StatelessWidget {
               : Container(
             margin: const EdgeInsets.only(left: 25.0, right: 25.0, bottom: 50.0),
             decoration: BoxDecoration(
-              color: Colors.grey.shade400,
+              color: provider.isDark? MyThemeData.darkPrimaryBlue : Colors.grey.shade400,
               border:
               Border.all(color: MyThemeData.colorGold, width: 2.0),
               borderRadius: BorderRadius.circular(12.0),

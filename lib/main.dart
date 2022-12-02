@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/screens/hadeeth/hadeeth_details_screen.dart';
 import 'package:islami_app/screens/quran/sura_details/sura_details_screen.dart';
 import 'package:islami_app/themes/my_theme.dart';
 import 'package:islami_app/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => MyProviders()),
+    ],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,6 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of <MyProviders> (context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
@@ -23,7 +30,7 @@ class MyApp extends StatelessWidget {
       },
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: provider.isDarkLight,
     );
   }
 }

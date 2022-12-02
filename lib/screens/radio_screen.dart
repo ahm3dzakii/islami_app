@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/themes/my_theme.dart';
+import 'package:provider/provider.dart';
 
 class RadioScreen extends StatelessWidget {
   const RadioScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of <MyProviders> (context);
     return Container(
       width: double.infinity,
       child: Column(
@@ -23,9 +26,9 @@ class RadioScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ImageIcon(AssetImage('assets/images/prev_image_icon.png'), color: MyThemeData.colorGold,),
-                ImageIcon(AssetImage('assets/images/play_pause_image_icon.png'), color: MyThemeData.colorGold,),
-                ImageIcon(AssetImage('assets/images/next_image_icon.png'), color: MyThemeData.colorGold,),
+                ImageIcon(AssetImage('assets/images/prev_image_icon.png'), color: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,),
+                ImageIcon(AssetImage('assets/images/play_pause_image_icon.png'), color: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,),
+                ImageIcon(AssetImage('assets/images/next_image_icon.png'), color: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,),
               ],
             ),
           ),
