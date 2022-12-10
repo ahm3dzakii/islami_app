@@ -4,6 +4,7 @@ import 'package:islami_app/screens/hadeeth/ahadeth_screen.dart';
 import 'package:islami_app/themes/my_theme.dart';
 import 'package:provider/provider.dart';
 
+
 class HadeethDetailsScreen extends StatelessWidget {
 
   static const String routeName = 'HadeethDetailsScreen';

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/screens/hadeeth/hadeeth_details_screen.dart';
 import 'package:islami_app/themes/my_theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
 
 class AhadethScreen extends StatefulWidget {
   @override
@@ -13,6 +17,7 @@ class _AhadethScreenState extends State<AhadethScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of <MyProviders> (context);
     if (ahadeth.isEmpty) {
       loadAhadethFile();
     }
@@ -23,7 +28,7 @@ class _AhadethScreenState extends State<AhadethScreen> {
           Image.asset('assets/images/ahadeth_image.png'),
           Divider(color: MyThemeData.colorGold, thickness: 1.0),
           Text(
-            'الأحاديث',
+            AppLocalizations.of(context)!.ahadethScreenSubTitle,
             style: Theme.of(context).textTheme.headline1,
           ),
           Divider(color: MyThemeData.colorGold, thickness: 1.0),

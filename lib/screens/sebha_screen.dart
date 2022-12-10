@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/provider/change_language_provider.dart';
 import 'package:islami_app/provider/dark_mood_provider.dart';
 import 'package:islami_app/themes/my_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SebhaScreen extends StatefulWidget {
 
@@ -12,18 +14,26 @@ class SebhaScreen extends StatefulWidget {
 class _SebhaScreenState extends State<SebhaScreen> {
 
   int counter = 0;
-  List <String> tasbeh = [
+  List <String> tasbehArabic = [
     'سبحان الله',
     'الحمد لله',
     'لا اله الا الله',
     'الله اكبر'
   ];
-  String? tasbehSelected = 'سبحان الله';
+  List <String> tasbehEnglish = [
+    'Hallelujah',
+    'Elhamdulelah',
+    'La ilaha illallah',
+    'Allahu akbar'
+  ];
+  String? tasbehSelectedArabic = 'سبحان الله';
+  String? tasbehSelectedEnglish = 'Hallelujah';
 
 
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of <MyProviders> (context);
+    var languageProvider = Provider.of <ChangeLanguageProvider> (context);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -32,7 +42,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
             Image.asset('assets/images/sebha_image.png'),
             const SizedBox(height: 10.0,),
             Text(
-              'عدد التسبيحات',
+              AppLocalizations.of(context)!.sebhaScreenSubTitle,
               style: Theme.of(context).textTheme.headline1,
             ),
             const SizedBox(height: 20.0,),
@@ -62,14 +72,14 @@ class _SebhaScreenState extends State<SebhaScreen> {
                   iconEnabledColor: provider.isDark? MyThemeData.darkPrimaryBlue : MyThemeData.colorWhite,
                   style: Theme.of(context).textTheme.subtitle2,
                   borderRadius: BorderRadius.circular(20.0),
-                  value: tasbehSelected,
+                  value: languageProvider.defLanguage == 'ar'? tasbehSelectedArabic : tasbehSelectedEnglish,
                   dropdownColor: provider.isDark? MyThemeData.darkPrimaryGold : MyThemeData.colorGold,
                   onChanged: (String? newValue) {
                     setState(() {
-                      tasbehSelected = newValue;
+                      languageProvider.defLanguage == 'ar'? tasbehSelectedArabic = newValue : tasbehSelectedEnglish = newValue;
                     });
                   },
-                  items: tasbeh.map((chooseTasbeh) {
+                  items: languageProvider.defLanguage == 'ar'? tasbehArabic.map((chooseTasbeh) {
                     return DropdownMenuItem(
                       value: chooseTasbeh,
                       child: Padding(
@@ -78,6 +88,19 @@ class _SebhaScreenState extends State<SebhaScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(chooseTasbeh, textAlign: TextAlign.center,),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList() : tasbehEnglish.map((chooseTasbehh) {
+                    return DropdownMenuItem(
+                      value: chooseTasbehh,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(chooseTasbehh, textAlign: TextAlign.center,),
                           ],
                         ),
                       ),
@@ -101,18 +124,22 @@ class _SebhaScreenState extends State<SebhaScreen> {
 
   void incrementCounter () {
 
-    if(counter == 33 &&  tasbehSelected == tasbeh[0]) {
+    if(counter == 33 &&  (tasbehSelectedArabic == tasbehArabic[0] || tasbehSelectedEnglish == tasbehEnglish[0]) ) {
       counter = 0;
-      tasbehSelected = tasbeh[1];
-    } else if(counter == 33 &&  tasbehSelected == tasbeh[1]) {
+      tasbehSelectedArabic = tasbehArabic[1];
+      tasbehSelectedEnglish = tasbehEnglish[1];
+    } else if(counter == 33 &&  (tasbehSelectedArabic == tasbehArabic[1] || tasbehSelectedEnglish == tasbehEnglish[1]) ) {
       counter = 0;
-      tasbehSelected = tasbeh[2];
-    } else if(counter == 33 &&  tasbehSelected == tasbeh[2]) {
+      tasbehSelectedArabic = tasbehArabic[2];
+      tasbehSelectedEnglish = tasbehEnglish[2];
+    } else if(counter == 33 &&  (tasbehSelectedArabic == tasbehArabic[2] || tasbehSelectedEnglish == tasbehEnglish[2]) ) {
       counter = 0;
-      tasbehSelected = tasbeh[3];
-    } else if(counter == 33 &&  tasbehSelected == tasbeh[3]) {
+      tasbehSelectedArabic = tasbehArabic[3];
+      tasbehSelectedEnglish = tasbehEnglish[3];
+    } else if(counter == 33 &&  (tasbehSelectedArabic == tasbehArabic[3] || tasbehSelectedEnglish == tasbehEnglish[3]) ) {
       counter = 0;
-      tasbehSelected = tasbeh[0];
+      tasbehSelectedArabic = tasbehArabic[0];
+      tasbehSelectedEnglish = tasbehEnglish[0];
     } else {
       counter++;
     }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class MyProviders extends ChangeNotifier {
 
-  ThemeMode isDarkLight = ThemeMode.light;
-  bool isDark = false;
+  ThemeMode isDarkLight = ThemeMode.dark;
+  bool isDark = true;
 
   void isDarkLightMood(ThemeMode themeMode) {
     isDarkLight = themeMode;
