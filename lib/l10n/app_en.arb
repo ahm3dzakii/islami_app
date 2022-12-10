@@ -1,0 +1,21 @@
+{
+    "radioTab":"Radio",
+    "sebhaTab":"Sebha",
+    "ahadethTab":"Ahadeth",
+    "quranTab":"Quran",
+
+    "appTitle":"Islami",
+
+    "radioScreenSubTitle":"Holy Quran Radio",
+
+    "sebhaScreenSubTitle":"The number of praises",
+    "sebhaDropDown1":"Hallelujah",
+    "sebhaDropDown2":"Elhamdulelah",
+    "sebhaDropDown3":"La ilaha illallah",
+    "sebhaDropDown4":"Allahu akbar",
+
+    "ahadethScreenSubTitle":"Ahadeth",
+
+    "quranScreenSubTitle":"Sura Name"
+
+}
